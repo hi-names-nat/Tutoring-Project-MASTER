@@ -10,11 +10,13 @@ public class PlayerProto : MonoBehaviour
     //Public
 
     //Serialized
-
+    [SerializeField] float movementSpeed = 3f;
+    [SerializeField] float Fallspeed = -9.81f;
     //Unserialized
     private CharacterController controller;
-    private PlayerInput input;
-    
+    private Vector2 val;
+
+
 
     private void Awake()
     {
@@ -22,21 +24,73 @@ public class PlayerProto : MonoBehaviour
         {
             Debug.LogError("No Character controller attached to player GameObject!");
         }
-        if (!TryGetComponent<PlayerInput>(out input))
-        {
-            Debug.LogError("No Player Input component attached");
-        }
 
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         
     }
 
     // Update is called once per frame
     void Update()
+    {
+        controller.Move(new Vector3(val.x * Time.deltaTime, 0, val.y * Time.deltaTime));
+        print(val / movementSpeed);
+    }
+
+    private void FixedUpdate()
+    {
+        controller.Move(new Vector3(0, Fallspeed * Time.deltaTime, 0));
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    /// Input System Binds.
+    /// Do not change the name of these binds unless you also change the name of the Input Action.
+    /// Do not remove the "On"
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    void OnMove(InputValue value)
+    {
+        val = value.Get<Vector2>();
+        val *= movementSpeed;
+        
+    }
+
+    void OnAttack(InputValue value)
+    {
+        print(value.Get<bool>());
+    }
+
+    void OnRun(InputValue value)
+    {
+
+    }
+
+    void OnItem(InputValue value)
+    {
+
+    }
+
+    void OnItem2(InputValue value)
+    {
+
+    }
+
+    void OnItemMenu(InputValue value)
+    {
+
+    }
+
+    void OnWheel(InputValue value)
+    {
+
+    }
+
+    void OnPauseMenu(InputValue value)
     {
         
     }

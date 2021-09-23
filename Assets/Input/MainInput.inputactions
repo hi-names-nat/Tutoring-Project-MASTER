@@ -1,5 +1,5 @@
 {
-    "name": "Main Input",
+    "name": "MainInput",
     "maps": [
         {
             "name": "Gameplay Mode",
@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "8d6d73ad-a745-4664-a660-f3e2ac1ba383",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": ""
                 },
                 {
@@ -71,17 +71,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "59e8397b-87f5-403f-8e6e-2916abe001fb",
-                    "path": "<Joystick>/stick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "Arrows",
                     "id": "bea35de7-5c36-4d85-a097-ec2195e446b8",
