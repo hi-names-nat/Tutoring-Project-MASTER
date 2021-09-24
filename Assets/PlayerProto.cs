@@ -31,8 +31,9 @@ public class PlayerProto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        controller.Move(new Vector3(val.x * Time.deltaTime, 0, val.y * Time.deltaTime));
-        print(val / movementSpeed);
+        
+        controller.Move((new Vector3(val.x, 0, val.y)).normalized * movementSpeed * Time.deltaTime);
+        print((new Vector3(val.x, 0, val.y)).normalized * movementSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -56,7 +57,6 @@ public class PlayerProto : MonoBehaviour
     void OnMove(InputValue value)
     {
         val = value.Get<Vector2>();
-        val *= movementSpeed;
         
     }
 
