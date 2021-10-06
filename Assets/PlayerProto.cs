@@ -12,9 +12,21 @@ public class PlayerProto : MonoBehaviour
     //Serialized
     [SerializeField] float movementSpeed = 3f;
     [SerializeField] float Fallspeed = -9.81f;
+
+    [System.Serializable]
+    public class swordStats
+    {
+        [SerializeField] public GameObject obj;
+        [SerializeField] public float swingTime;
+        public float currentTime;
+    }
+    [SerializeField] swordStats sword;
+    
     //Unserialized
     private CharacterController controller;
     private Vector2 val;
+
+    private bool isAttacking = false;
 
 
 
@@ -31,9 +43,9 @@ public class PlayerProto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 movement = (new Vector3(val.x, 0, val.y)).normalized * movementSpeed * Time.deltaTime;
+        controller.Move(movement);
         
-        controller.Move((new Vector3(val.x, 0, val.y)).normalized * movementSpeed * Time.deltaTime);
-        print((new Vector3(val.x, 0, val.y)).normalized * movementSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -57,12 +69,25 @@ public class PlayerProto : MonoBehaviour
     void OnMove(InputValue value)
     {
         val = value.Get<Vector2>();
+        controller.transform.LookAt(transform.position.y - val);
         
     }
 
     void OnAttack(InputValue value)
     {
-        print(value.Get<bool>());
+        isAttacking = true;
+    }
+
+    void Attacking(float time)
+    {
+        float initialPosition = 45, finalPosition = -45;
+
+        if (time == 0)
+        {
+            sword.obj.transform.eulerAngles = new Vector3 (0, initialPosition);
+            sword.currentTime = sword.swingTime;
+        }
+        sword.obj.transform.eulerAngles = new Vector3(0, Mathf.Lerp(initialPosition, finalPosition, sword.currentTime));
     }
 
     void OnRun(InputValue value)

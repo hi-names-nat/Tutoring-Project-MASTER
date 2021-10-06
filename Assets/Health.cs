@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+interface managedHealth
 {
+    public void DealHealth(int dealt, bool useDefense = true);
+}
 
+class standardManagedHealth : MonoBehaviour, managedHealth
+{
+    [SerializeField] public int maxHealth { get; protected set; }
 
-    [SerializeField] float maxHealth;
-    [SerializeField] float startingHealth;
-    float currentHealth;
+    public int currentHealth { get; protected set; }
 
-    [SerializeField] float deathTime;
-    [SerializeField] UnityEvent onDeath;
+    public float defenseValue { get; protected set; } = 0;
 
-    private void Awake()
+    public void DealHealth(int dealt, bool useDefense = true)
     {
-       
+        if (!useDefense)
+        {
+            currentHealth -= dealt; return;
+        }
+
+        currentHealth -= (int)Mathf.Floor(dealt - ((float)dealt * defenseValue));
     }
 }
