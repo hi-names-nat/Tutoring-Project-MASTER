@@ -42,12 +42,11 @@ public class PlayerProto : MonoBehaviour
     {
         if (!TryGetComponent<CharacterController>(out _controller))
         {
-            Debug.LogError("No Character _controller attached to player GameObject!");
+            Debug.LogError("No CharacterController attached to player GameObject!");
         }
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         _controller.Move(new Vector3(_val.x * Time.deltaTime, 0, _val.y * Time.deltaTime) * movementSpeed);
@@ -58,8 +57,6 @@ public class PlayerProto : MonoBehaviour
     {
         doGravity();
     }
-
-
 
     private void doGravity()
     {
