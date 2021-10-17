@@ -5,54 +5,70 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
+[ExecuteInEditMode]
 public class PlayerProto : MonoBehaviour
 {
     //Public
+    // My public variables start with a capital.
 
     //Serialized
-    [SerializeField] float movementSpeed = 3f;
-    [SerializeField] float Fallspeed = -9.81f;
+    // My serialized private variables start with a lowercase.
 
-    [System.Serializable]
-    public class swordStats
-    {
-        [SerializeField] public GameObject obj;
-        [SerializeField] public float swingTime;
-        public float currentTime;
-    }
-    [SerializeField] swordStats sword;
+    [Tooltip("The speed at which the player moves by default.")]
+    [SerializeField] float movementSpeed = 3f;
+    [Tooltip("The accelleration at which the player will fall.")]
+    [SerializeField] float fallAcceleration = -3.27f;
+    [Tooltip("The max speed at which the player can fall.")]
+    [SerializeField] float maxFallSpeed = -4.0f;
+    
     
     //Unserialized
-    private CharacterController controller;
-    private Vector2 val;
+    // My unserialized private fields start with an underscore.
 
-    private bool isAttacking = false;
-
-
+    /// <summary>
+    /// Reference to the controller.
+    /// </summary>
+    private CharacterController _controller;
+    /// <summary>
+    /// The value of the current movement.
+    /// </summary>
+    private Vector2 _val;
+    /// <summary>
+    /// the last speed that the player had fallen.
+    /// </summary>
+    float _lastFallSpeed = 0;
 
     private void Awake()
     {
-        if (!TryGetComponent<CharacterController>(out controller))
+        if (!TryGetComponent<CharacterController>(out _controller))
         {
-            Debug.LogError("No Character controller attached to player GameObject!");
+            Debug.LogError("No Character _controller attached to player GameObject!");
         }
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 movement = (new Vector3(val.x, 0, val.y)).normalized * movementSpeed * Time.deltaTime;
-        controller.Move(movement);
-        
+        _controller.Move(new Vector3(_val.x * Time.deltaTime, 0, _val.y * Time.deltaTime) * movementSpeed);
+        Debug.DrawRay(transform.position, transform.forward, Color.magenta);
     }
 
     private void FixedUpdate()
     {
-        controller.Move(new Vector3(0, Fallspeed * Time.deltaTime, 0));
+        doGravity();
     }
 
+
+
+    private void doGravity()
+    {
+        _controller.Move(new Vector3(0, _lastFallSpeed));
+        if (!_controller.isGrounded && _lastFallSpeed > maxFallSpeed)
+            _lastFallSpeed += fallAcceleration * Time.deltaTime;
+        else if (_controller.isGrounded)
+            _lastFallSpeed = -.01f;
+    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -63,60 +79,48 @@ public class PlayerProto : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    /// Our movement code. Gets our vector from our input, and stores it in a class variable.
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="value">The input value, specifically a Vector2</param>
     void OnMove(InputValue value)
     {
-        val = value.Get<Vector2>();
-        controller.transform.LookAt(transform.position.y - val);
-        
+        _val = value.Get<Vector2>();
+        if (_val != Vector2.zero)
+            transform.forward = new Vector3(_val.x, 0, _val.y);
     }
 
     void OnAttack(InputValue value)
     {
-        isAttacking = true;
-    }
-
-    void Attacking(float time)
-    {
-        float initialPosition = 45, finalPosition = -45;
-
-        if (time == 0)
-        {
-            sword.obj.transform.eulerAngles = new Vector3 (0, initialPosition);
-            sword.currentTime = sword.swingTime;
-        }
-        sword.obj.transform.eulerAngles = new Vector3(0, Mathf.Lerp(initialPosition, finalPosition, sword.currentTime));
+        //just evoke an animation
     }
 
     void OnRun(InputValue value)
     {
-
+        //step-up to a new speed, when released step down.
     }
 
     void OnItem(InputValue value)
     {
-
+        //evoke item
     }
 
     void OnItem2(InputValue value)
     {
-
+        //evoke item2
     }
 
     void OnItemMenu(InputValue value)
     {
-
+        //evoke the item menu
     }
 
     void OnWheel(InputValue value)
     {
-
+        //evoke the item wheel
     }
 
     void OnPauseMenu(InputValue value)
     {
-        
+        //Evoke the pause menu
     }
 }
