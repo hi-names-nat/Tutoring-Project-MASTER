@@ -15,6 +15,7 @@ public class FollowerCamera : MonoBehaviour
     Camera _camera;
     Vector3 _followPosition = Vector3.zero;
     bool _isCameraMoving = false;
+ 
 
     private void Awake()
     {
@@ -29,8 +30,9 @@ public class FollowerCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // worldtoscreenpoint is a ratio of where the player is on screen so its possible to use that ratio to move the camera rather than to do it like this.
         float moveAmount = 5f;
+        // worldtoscreenpoint is a ratio of where the player is on screen so its possible to use that ratio to move the camera rather than to do it like this.
+
         if (_camera.WorldToScreenPoint(player.gameObject.transform.position).x > Screen.width - screenEdgeW)
         {
             _followPosition.x += moveAmount * Time.deltaTime;
