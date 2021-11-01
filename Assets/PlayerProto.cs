@@ -81,7 +81,7 @@ public class PlayerProto : MonoBehaviour
     /// <param name="value">The input value, specifically a Vector2</param>
     void OnMove(InputValue value)
     {
-        _val = value.Get<Vector2>();
+        _val = value.Get<Vector2>().normalized;
         if (_val != Vector2.zero)
             transform.forward = new Vector3(_val.x, 0, _val.y);
     }
