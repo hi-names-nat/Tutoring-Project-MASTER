@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class DamageVolume : MonoBehaviour
 {
-    [SerializeField] float damage = 5f;
-    
+    [SerializeField] int damage = 5;
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerStay(Collider other)
     {
-        
+        print(other.gameObject);
+        if (other.TryGetComponent<standardManagedHealth>(out standardManagedHealth h))
+        {
+            h.DealHealth(damage);
+        }
     }
 }

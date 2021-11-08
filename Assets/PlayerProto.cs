@@ -20,6 +20,8 @@ public class PlayerProto : MonoBehaviour
     [SerializeField] float fallAcceleration = -3.27f;
     [Tooltip("The max speed at which the player can fall.")]
     [SerializeField] float maxFallSpeed = -4.0f;
+
+    [SerializeField] Animator sword;
     
     
     //Unserialized
@@ -88,7 +90,7 @@ public class PlayerProto : MonoBehaviour
 
     void OnAttack(InputValue value)
     {
-        //just evoke an animation
+        sword.SetTrigger("swingSword");
     }
 
     void OnRun(InputValue value)
