@@ -7,7 +7,7 @@ public class DamageVolume : MonoBehaviour
     [SerializeField] int damage = 5;
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         print(other.gameObject);
         if (other.TryGetComponent<standardManagedHealth>(out standardManagedHealth h))
