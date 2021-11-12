@@ -19,15 +19,17 @@ class standardManagedHealth : MonoBehaviour, managedHealth
 
     public float defenseValue { get; protected set; } = 0;
 
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+
     public void DealHealth(int dealt, bool useDefense = true)
     {
         if (!useDefense)
         {
-            currentHealth -= dealt; return;
-        }
-
-        currentHealth -= (int)Mathf.Floor(dealt - ((float)dealt * defenseValue));
-
-        if (currentHealth >= 0) onDeath.Invoke();
+            currentHealth -= dealt;
+        } else currentHealth -= (int)Mathf.Floor(dealt - ((float)dealt * defenseValue));
+        if (currentHealth <= 0) onDeath.Invoke();
     }
 }

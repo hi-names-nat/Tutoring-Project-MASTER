@@ -9,10 +9,10 @@ public class DamageVolume : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject);
+        
         if (other.TryGetComponent<standardManagedHealth>(out standardManagedHealth h))
         {
-            h.DealHealth(damage);
+            h.DealHealth(damage, false);
         }
     }
 }
