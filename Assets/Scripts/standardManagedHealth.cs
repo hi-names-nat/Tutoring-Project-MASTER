@@ -9,7 +9,7 @@ interface managedHealth
 
 }
 
-class standardManagedHealth : MonoBehaviour, managedHealth
+public class standardManagedHealth : MonoBehaviour, managedHealth
 {
     public UnityEvent onDeath;
 
@@ -29,7 +29,9 @@ class standardManagedHealth : MonoBehaviour, managedHealth
         if (!useDefense)
         {
             currentHealth -= dealt;
-        } else currentHealth -= (int)Mathf.Floor(dealt - ((float)dealt * defenseValue));
+        }
+        else currentHealth -= (int)Mathf.Floor(dealt - ((float)dealt * defenseValue));
+
         if (currentHealth <= 0) onDeath.Invoke();
     }
 }
