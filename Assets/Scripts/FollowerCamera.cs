@@ -18,6 +18,8 @@ public class FollowerCamera : MonoBehaviour
     Vector3 _playerPosition = Vector3.zero;
     bool _isCameraMoving = false;
 
+    float _lastPositionx, _lastPositionY;
+
 
     private void Awake()
     {
@@ -36,25 +38,33 @@ public class FollowerCamera : MonoBehaviour
         screenEdgeW = Mathf.FloorToInt((float)Screen.width * (screenPercentX / 2) / 100);
         screenEdgeH = Mathf.FloorToInt((float)Screen.height * (screenPercentY / 2) / 100);
 
+        //There's potential to find the difference between last frame and this frame and move the camera based on that, it would fix the jittering issue.
         if (_playerPosition.x > Screen.width - screenEdgeW)
         {
+            
             _followPosition.x += moveAmount * Time.deltaTime;
             _isCameraMoving = true;
+            _lastPositionx = _playerPosition.x;
         }
         if (_playerPosition.x < screenEdgeW)
         {
+            
             _followPosition.x -= moveAmount * Time.deltaTime;
             _isCameraMoving = true;
+            _lastPositionx = _playerPosition.x;
         }
         if (_playerPosition.y > Screen.height - screenEdgeH)
         {
+            
             _followPosition.z += moveAmount * Time.deltaTime;
             _isCameraMoving = true;
+                _lastPositionY = _playerPosition.y;
         }
         if (_playerPosition.y < screenEdgeH)
         {
             _followPosition.z -= moveAmount * Time.deltaTime;
             _isCameraMoving = true;
+            _lastPositionY = _playerPosition.y;
         }
 
         transform.position = _followPosition;

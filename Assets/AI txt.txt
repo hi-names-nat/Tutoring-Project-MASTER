@@ -1,0 +1,25 @@
+firstly
+enemies
+
+standard "walk into" enemy
+"flank" style enemy
+Projectile enemy
+
+need to be able to determine
+- goal
+- attack
+
+Should enemies be able to attack and move?
+Walk into - Doesn't matter
+projectile enemy: no, allows player to punish.
+
+state moving
+state attacking
+state stunned(?)
+
+decision shouldAttack
+decision shouldMove
+
+function findGoal
+function attack
+function move
