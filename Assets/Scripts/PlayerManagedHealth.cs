@@ -13,15 +13,16 @@ public class PlayerManagedHealth : standardManagedHealth
         if (isInvulnerable)
         {
             currentTime += Time.deltaTime;
+            print(currentHealth);
             if (currentTime >= InvulnerableTime)
             {
                 currentTime = 0;
                 isInvulnerable = false;
             }
-        }    
+        }
     }
 
-    new public void DealHealth(int dealt, bool useDefense = true)
+    override public void DealHealth(int dealt, bool useDefense = true)
     {
         if (isInvulnerable) return;
         isInvulnerable = true;

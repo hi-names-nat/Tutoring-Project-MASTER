@@ -14,17 +14,17 @@ public class standardManagedHealth : MonoBehaviour, managedHealth
     public UnityEvent onDeath;
 
     [SerializeField] public int maxHealth;
-        
-    public int currentHealth { get; protected set; }
+
+     public int currentHealth { get; protected set; }
 
     public float defenseValue { get; protected set; } = 0;
 
-    private void Awake()
+    protected void Awake()
     {
         currentHealth = maxHealth;
     }
 
-    public void DealHealth(int dealt, bool useDefense = true)
+    virtual public void DealHealth(int dealt, bool useDefense = true)
     {
         if (!useDefense)
         {

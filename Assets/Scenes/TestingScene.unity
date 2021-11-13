@@ -875,8 +875,8 @@ GameObject:
   - component: {fileID: 974556390}
   - component: {fileID: 974556389}
   - component: {fileID: 974556388}
-  - component: {fileID: 974556387}
   - component: {fileID: 974556392}
+  - component: {fileID: 974556387}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc48d541b391dab478cd23812dbac6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
 --- !u!95 &1001408384
 Animator:
   serializedVersion: 3
