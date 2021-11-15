@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ffbda1c22fbafd4993858560d7bbc7e, type: 3}
-  m_Name: Walker_Walking
+  m_Script: {fileID: 11500000, guid: 3534637322ae14044b5a4d811bfbe339, type: 3}
+  m_Name: New Flee Action
   m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 11400000, guid: 747f704471f4ae54391596a2de11f81a, type: 2}
-  transitions: []
-  sceneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  stateToTransitionTo: {fileID: 0}
+  fleeRadius: 0.2

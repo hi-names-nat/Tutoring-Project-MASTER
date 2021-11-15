@@ -24,8 +24,14 @@ public class PlayerManagedHealth : standardManagedHealth
 
     override public void DealHealth(int dealt, bool useDefense = true)
     {
+        print("player says ow");
         if (isInvulnerable) return;
         isInvulnerable = true;
         base.DealHealth(dealt, useDefense);
+    }
+
+    override public void PushBack(float factor, Vector3 direction)
+    {
+        GetComponent<CharacterController>().transform.Translate(direction * factor);
     }
 }

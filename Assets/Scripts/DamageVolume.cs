@@ -6,6 +6,7 @@ public class DamageVolume : MonoBehaviour
 {
     [SerializeField] int damage = 5;
     [SerializeField] bool doPushBack;
+    [SerializeField] PlayerProto referenceObj;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,8 +14,8 @@ public class DamageVolume : MonoBehaviour
 
         if (other.TryGetComponent<standardManagedHealth>(out standardManagedHealth h))
         {
+            if (doPushBack) h.PushBack(1.5f, referenceObj.transform.forward);
             h.DealHealth(damage, false);
-            if (doPushBack) transform.position -= (transform.forward * 1.5f);
         }
     }
 }
