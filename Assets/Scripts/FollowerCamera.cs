@@ -44,27 +44,27 @@ public class FollowerCamera : MonoBehaviour
             
             _followPosition.x += moveAmount * Time.deltaTime;
             _isCameraMoving = true;
-            _lastPositionx = _playerPosition.x;
+            
         }
         if (_playerPosition.x < screenEdgeW)
         {
             
             _followPosition.x -= moveAmount * Time.deltaTime;
             _isCameraMoving = true;
-            _lastPositionx = _playerPosition.x;
+            
         }
         if (_playerPosition.y > Screen.height - screenEdgeH)
         {
             
             _followPosition.z += moveAmount * Time.deltaTime;
             _isCameraMoving = true;
-                _lastPositionY = _playerPosition.y;
+                
         }
         if (_playerPosition.y < screenEdgeH)
         {
             _followPosition.z -= moveAmount * Time.deltaTime;
             _isCameraMoving = true;
-            _lastPositionY = _playerPosition.y;
+            
         }
 
         transform.position = _followPosition;
