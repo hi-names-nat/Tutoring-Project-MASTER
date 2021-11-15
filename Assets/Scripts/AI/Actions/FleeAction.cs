@@ -16,9 +16,7 @@ public class FleeAction : AIAction
 
     private void Flee(AIEntity controller)
     {
-        if (controller.fleePoint == Vector3.zero)
-        {
-            controller.Agent.SetDestination(controller.GetFleePoint(fleeRadius));
-        }
+        
     }
 }
+a
