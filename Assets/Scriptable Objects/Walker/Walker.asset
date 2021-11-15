@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050a6a6720fab084abf1145daec24ce8, type: 3}
   m_Name: Walker
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 3
   searchRadius: 0
   fireCooldown: {x: 0, y: 0}
   stoppingDistance: {x: 0, y: 0}
