@@ -26,16 +26,15 @@ public class MaterialTransparenter : MonoBehaviour
                     h.collider.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b, 1);
                 }
             }
-        int layerMask;
-        layerMask = 1;
-        print("is here");
+        LayerMask mask = LayerMask.GetMask("Player");
+
         Debug.DrawRay(transform.position, player.transform.position - transform.position);
-        hits = Physics.SphereCastAll(transform.position, .5f, player.transform.position - transform.position, layerMask, (int)QueryTriggerInteraction.Ignore);
+        hits = Physics.SphereCastAll(transform.position, .5f, player.transform.position - transform.position, mask, (int)QueryTriggerInteraction.Ignore);
         foreach (RaycastHit h in hits)
         {
-            if (h.collider.gameObject == player.gameObject) return;
-            if (h.collider.GetComponent<Renderer>() != null)
+            if (h.collider.GetComponent<Renderer>() != null && player.transform.position.z - transform.position.z > h.collider.transform.position.z - transform.position.z)
             {
+                
                 print(h.collider.gameObject.name);
                 Color color = h.collider.GetComponent<Renderer>().material.color;
                 h.collider.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b, transparency);

@@ -18,13 +18,14 @@ public class FollowerCamera : MonoBehaviour
     Vector3 _playerPosition = Vector3.zero;
     bool _isCameraMoving = false;
 
-    float _lastPositionx, _lastPositionY;
+    float _lastPositionx, _lastPositionY, _lastPositionZ = 0;
 
 
     private void Awake()
     {
         TryGetComponent(out _camera);
         _followPosition = transform.position;
+        _lastPositionZ = player.transform.position.z;
 
     }
 
