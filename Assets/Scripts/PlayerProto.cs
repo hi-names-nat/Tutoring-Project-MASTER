@@ -10,7 +10,7 @@ public class PlayerProto : MonoBehaviour
 {
     //Public
     // My public variables start with a capital.
-
+    public GameState gameState;
     //Serialized
     // My serialized private variables start with a lowercase.
 
@@ -20,6 +20,7 @@ public class PlayerProto : MonoBehaviour
     [SerializeField] float fallAcceleration = -3.27f;
     [Tooltip("The max speed at which the player can fall.")]
     [SerializeField] float maxFallSpeed = -4.0f;
+
 
     [SerializeField] Animator sword;
     
@@ -46,7 +47,7 @@ public class PlayerProto : MonoBehaviour
         {
             Debug.LogError("No CharacterController attached to player GameObject!");
         }
-
+        gameState = new GameState();
     }
 
     void Update()

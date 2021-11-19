@@ -26,10 +26,10 @@ public class MaterialTransparenter : MonoBehaviour
                     h.collider.GetComponent<Renderer>().material.color = new Color(color.r, color.g, color.b, 1);
                 }
             }
-        LayerMask mask = LayerMask.GetMask("Player");
+        LayerMask mask = LayerMask.GetMask(new string[]{ "Player", "Ignore Raycast"});
 
         Debug.DrawRay(transform.position, player.transform.position - transform.position);
-        hits = Physics.SphereCastAll(transform.position, .5f, player.transform.position - transform.position, mask, (int)QueryTriggerInteraction.Ignore);
+        hits = Physics.SphereCastAll(transform.position, 2f, player.transform.position - transform.position, mask, (int)QueryTriggerInteraction.Ignore);
         foreach (RaycastHit h in hits)
         {
             if (h.collider.GetComponent<Renderer>() != null && player.transform.position.z - transform.position.z > h.collider.transform.position.z - transform.position.z)
